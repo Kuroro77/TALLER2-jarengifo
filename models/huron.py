@@ -7,5 +7,5 @@ class Huron():
         self.__pais_origen = pais_origen
         self.__impuestos = impuestos
 
-def hacer_sonido(self) -> str:
+    def hacer_sonido(self) -> str:
         return "¡Eek Eek!"
