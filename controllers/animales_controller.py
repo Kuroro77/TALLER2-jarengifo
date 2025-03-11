@@ -1,6 +1,8 @@
 from flask import Blueprint, render_template, jsonify
 from models.huron import Huron
 from models.boa import Boa
+from models.perro import Perro
+from models.gato import Gato
 
 home_blueprint = Blueprint("home", __name__)
 
@@ -44,5 +46,41 @@ def boa():
     data_boa = Boa('Pedro', 128.0, 5, 'Colombia', 1.25, 0)
     sonido_boa = data_boa.hacer_sonido()
     mensaje = f'La boa hace {sonido_boa}'
+
+    return render_template("index.html", sonido=mensaje)
+
+@home_blueprint.route("/api/perro")
+def api_perro():
+    data_perro = Perro("Zeus", 3, "Rottweiler", 45.8)
+    sonido_perro = data_perro.hacer_sonido()
+
+    return jsonify({
+        "mensaje": f'El perro hace {sonido_perro}',
+        "code": 200
+    })
+
+@home_blueprint.route("/perro")
+def perro():
+    data_perro = Perro("Zeus", 3, "Rottweiler", 45.8)
+    sonido_perro = data_perro.hacer_sonido()
+    mensaje = f'El perro hace {sonido_perro}'
+
+    return render_template("index.html", sonido=mensaje)
+
+@home_blueprint.route("/api/gato")
+def api_gato():
+    data_gato = Gato("Polainas", 2, "Callejero", 15.2)
+    sonido_gato = data_gato.hacer_sonido()
+
+    return jsonify({
+        "mensaje": f'El gato hace {sonido_gato}',
+        "code": 200
+    })
+
+@home_blueprint.route("/gato")
+def gato():
+    data_gato = Gato("Polainas", 2, "Callejero", 15.2)
+    sonido_gato = data_gato.hacer_sonido()
+    mensaje = f'El gato hace {sonido_gato}'
 
     return render_template("index.html", sonido=mensaje)
